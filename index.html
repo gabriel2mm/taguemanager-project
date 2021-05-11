@@ -31,8 +31,12 @@
     <!-- End Google Tag Manager (noscript) -->
     Olá mundo
 
+    <button onclick="window.dataLayer.push({event: 'click', custom: 'click:button', category: 'pagina-home', label:'click'})">click</button>
+
     <script>
-        window.dataLayer.push({ "page" : "teste", "name" : "teste2"});
+        document.addEventListener("DOMContentLoaded", function(){
+            window.dataLayer.push({ "page" : "teste", "name" : "teste2"});
+        });
     </script>
     
 </body>
