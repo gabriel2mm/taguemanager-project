@@ -31,11 +31,21 @@
     <!-- End Google Tag Manager (noscript) -->
     Olá mundo
 
-    <button onclick="window.dataLayer.push({'event': 'interaction', 'custom': 'click:button', 'category': 'pagina-home', 'label':'click'})">click</button>
+    <a href="pagina2.html" onclick="window.dataLayer.push({'event': 'interaction', 'custom': { 'category' : '[page.nome]', 'action' : 'click:link', 'label':'pagina2'}})">pagina 2</a>
+    <button onclick="window.dataLayer.push({'event': 'interaction', 'custom': { 'category' : '[page.nome]', 'action' : 'click:button', 'label':'click'}})">click</button>
 
     <script>
         document.addEventListener("DOMContentLoaded", function(){
-            window.dataLayer.push({ 'page' : "teste", 'name' : "teste2"});
+            window.dataLayer.push({ 'event' : "pageView", 'page' : {
+                'pagePath' : '[document.location.pathname]',
+                'titulo': '[document.title]',
+                'ambiente': 'portal-teste',
+                'produto' : 'teste',
+                'funcionalidade': 'hello world',
+                'detalhe' : 'inicio',
+                'nome': '[page.ambiente]:[page.produto]:[page.funcionalidade]:[page.datalhe]',
+                'perfil-plano': '[perfil-plano]'
+            }});
         });
     </script>
     
