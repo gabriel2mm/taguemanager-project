@@ -1,0 +1,12 @@
+@font-face {
+    font-family: ".";
+    src: url("BradescoSans-Regular-web.eot"); /* IE9 */
+    src: url("BradescoSans-Regular-web.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("BradescoSans-Regular-web.woff") format("woff"), /* chrome, firefox */
+    url("BradescoSans-Regular-web.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("BradescoSans-Regular-web.svg#.") format("svg"); /* iOS 4.1- */
+    font-style: normal;
+    font-weight: normal;
+}
+
+
