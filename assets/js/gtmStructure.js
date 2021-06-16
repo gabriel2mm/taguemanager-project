@@ -1,8 +1,8 @@
 var pageCurrentGTM = $('.bs-breadcrumb-refactored').find('ul li').last().text().trim();
 var pagesGTM = $('.bs-breadcrumb-refactored').find('ul li')
+var nomeGTM = 'portal-institucional:' + getProductGTM(pagesGTM) + ':' + pageCurrentGTM + ':início';
 
 document.addEventListener("DOMContentLoaded", function(){
-    var nomeGTM = 'portal-institucional:' + getProductGTM(pagesGTM) + ':' + pageCurrentGTM + ':início';
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ 
         'event' : "pageView", 
@@ -43,4 +43,63 @@ function getProductGTM(page){
     return resultProduct;
 }
 
+/*Capturar evento click de todos os links da página*/
+$('body').find('a').on('click', function(value){
+    var templateCurrent = $(this);
+    var textLinkItemGTM = $(this).text();
+    var linkItemGTM = $(this).attr('href');
 
+    if($(templateCurrent).css("display") != 'none'){
+        if($(templateCurrent).attr('title') != null && $(templateCurrent).attr('title') != ""){
+            textLinkItemGTM = $(templateCurrent).attr('title');
+        }else{
+            if($(templateCurrent).find('.button-content').length != 0){
+                textLinkItemGTM = $(templateCurrent).find('.button-content').text().trim();
+            }else if($(templateCurrent).find('.bs-button-link').length != 0){
+                textLinkItemGTM = $(templateCurrent).find('.bs-button-link').text().trim();
+            }else{
+                textLinkItemGTM = $(templateCurrent).text().trim();
+            }
+        }
+        console.log('Nome do link : ' + textLinkItemGTM + ' HREF: ' + linkItemGTM) 
+        textLinkItemGTM != "" ? pushInteractionGTMLink(textLinkItemGTM, linkItemGTM) : null
+    }
+})
+
+/*Capturar evento click de todos os botões da página*/
+$('body').find('button').on('click', function(value){
+    var templateCurrentButton = $(this);
+    var textButtonGTM = "";
+    if($(templateCurrentButton).css("display") != 'none'){
+        if($(templateCurrentButton).attr('title') != null && $(templateCurrentButton).attr('title') != ""){
+            textButtonGTM = $(templateCurrentButton).attr('title').trim();;
+        }else{
+            textButtonGTM = $(templateCurrentButton).text().trim();
+        }
+        console.log('Nome do botao : ' + textButtonGTM) 
+        textButtonGTM != "" ? pushInteractionGTMButton(textButtonGTM) :  null
+    }
+})
+
+function pushInteractionGTMLink(textLink, linkItem){
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        'event': 'interaction',
+        'custom':{
+        'category': nomeGTM,
+        'action':'click:link',
+        'label': textLink,
+        'link': 'link-' + linkItem
+    }});
+}
+
+function pushInteractionGTMButton(textLink){
+    window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+        'event': 'interaction',
+        'custom':{
+        'category': nomeGTM,
+        'action':'click:button',
+        'label': textLink,
+    }});
+}
